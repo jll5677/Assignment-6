@@ -38,8 +38,8 @@ public class LeftOptionPanel extends JPanel{
         eraserButton = new JButton("Eraser");
         add(eraserButton);
         
-        thick = new JSlider(JSlider.HORIZONTAL, 0, 10, 5);
-        thick.setMajorTickSpacing(1);
+        thick = new JSlider(JSlider.HORIZONTAL, 0, 20, 5);
+        thick.setMajorTickSpacing(5);
         thick.setPaintTicks(true);
         thick.setPaintLabels(true);
         add(thick);

@@ -71,7 +71,7 @@ public class MainPanel extends JPanel implements MouseMotionListener, ActionList
             currColor = Color.BLACK;
         }
         if (eventSource == leftOptionPanel.getEraser()){
-            currColor = Color.WHITE;
+            currColor = getBackground();
         }
     }
     
