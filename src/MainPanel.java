@@ -29,9 +29,15 @@ public class MainPanel extends JPanel implements MouseMotionListener, ActionList
     private LeftOptionPanel leftOptionPanel;
     private ArrayList<Integer> x;
     private ArrayList<Integer> y;
+    private ArrayList<Color> color;
+    private ArrayList<Integer> thick;
 
      public MainPanel(){
-         
+        x = new ArrayList<>();
+        y = new ArrayList<>();
+        color = new ArrayList<>();
+        thick = new ArrayList<>();
+        
         leftOptionPanel = new LeftOptionPanel();
         
         BorderLayout border = new BorderLayout();
@@ -74,13 +80,10 @@ public class MainPanel extends JPanel implements MouseMotionListener, ActionList
         Graphics g = getGraphics();
         g.setColor(currColor);
         g.fillRect(e.getX(), e.getY(), thickness, thickness);
-        
-        x = new ArrayList<>();
-        for(int i=0;i< x.size();i++)
-        {
-            x.add(e.getX());
-        }
-        
+        x.add(e.getX());
+        y.add(e.getY());
+        color.add(currColor);
+        thick.add(thickness);
     }
     
     @Override
@@ -93,6 +96,13 @@ public class MainPanel extends JPanel implements MouseMotionListener, ActionList
         thickness = eventSource.getValue();
     }
 
-    
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        for(int i=0; i < x.size();i++){
+            g.setColor(color.get(i));
+            g.fillRect(x.get(i), y.get(i), thick.get(i), thick.get(i));
+        }
+        
+    }
 
 }

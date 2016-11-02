@@ -42,7 +42,6 @@ public class LeftOptionPanel extends JPanel{
         thick.setMajorTickSpacing(1);
         thick.setPaintTicks(true);
         thick.setPaintLabels(true);
-
         add(thick);
         
     }
