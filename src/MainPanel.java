@@ -19,8 +19,11 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class MainPanel extends JPanel implements MouseMotionListener, ActionListener{
+public class MainPanel extends JPanel implements MouseMotionListener, ActionListener, ChangeListener{
     private Color currColor;
     private int thickness;
     private LeftOptionPanel leftOptionPanel;
@@ -35,15 +38,18 @@ public class MainPanel extends JPanel implements MouseMotionListener, ActionList
         setLayout(border);
         add(leftOptionPanel, BorderLayout.NORTH);
         
+        currColor = Color.BLACK;
+        thickness = 5;
+        
         leftOptionPanel.getBlue().addActionListener(this);
         leftOptionPanel.getRed().addActionListener(this);
         leftOptionPanel.getBlack().addActionListener(this);
         leftOptionPanel.getEraser().addActionListener(this);
-
+        leftOptionPanel.getThick().addChangeListener(this);
+        
         addMouseMotionListener(this);
         setBackground(Color.white);
         
-
     }
      
     @Override
@@ -51,19 +57,15 @@ public class MainPanel extends JPanel implements MouseMotionListener, ActionList
         JButton eventSource = (JButton)w.getSource();
         if (eventSource == leftOptionPanel.getBlue()){
             currColor = Color.BLUE;
-            thickness = leftOptionPanel.getThick().getValue();
         }
         if (eventSource == leftOptionPanel.getRed()){
             currColor = Color.RED;
-            thickness = leftOptionPanel.getThick().getValue();
         }
         if (eventSource == leftOptionPanel.getBlack()){
             currColor = Color.BLACK;
-            thickness = leftOptionPanel.getThick().getValue();
         }
         if (eventSource == leftOptionPanel.getEraser()){
             currColor = Color.WHITE;
-            thickness = leftOptionPanel.getThick().getValue();
         }
     }
     
@@ -84,6 +86,13 @@ public class MainPanel extends JPanel implements MouseMotionListener, ActionList
     @Override
     public void mouseMoved(MouseEvent e){
     }
+
+    @Override
+    public void stateChanged(ChangeEvent ce) {
+        JSlider eventSource = (JSlider)ce.getSource();
+        thickness = eventSource.getValue();
+    }
+
     
-    
+
 }
